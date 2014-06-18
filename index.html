@@ -9,7 +9,7 @@
 			$("#editor").load("ajax.src", function() {
 				editor = ace.edit("editor");
 				editor.setTheme("ace/theme/monokai");
-				editor.getSession().setMode("ace/mode/html");
+				editor.getSession().setMode("ace/mode/javascript");
 			});
 			$("#filename").attr("value", "ajax.txt");
 		});

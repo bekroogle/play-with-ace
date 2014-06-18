@@ -1,1 +1,4 @@
-//this is my ajax test
+var foo = function() {
+	var bar = "beyond recognition.";
+	return bar;
+};
