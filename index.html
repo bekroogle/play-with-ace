@@ -5,17 +5,29 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		var editor;
+		var global_gist_data;
 		$(document).ready(function() {
 			$("#editor").load("ajax.src", function() {
 				editor = ace.edit("editor");
 				editor.setTheme("ace/theme/monokai");
 				editor.getSession().setMode("ace/mode/javascript");
+			
+				$("#post-gist").click(function() {
+					$.ajax({
+						url: 'https://api.github.com/gists/6942255',
+						type: 'GET',
+						dataType: 'jsonp'
+					}).success( function(gistdata) {
+						for (file in gistdata.data.files) {
+							editor.setValue(editor.getValue() + "\n" + gistdata.data.files[file].content);
+						}
+						global_gist_data = gistdata;
+					});
+				});
 			});
 			
 		
-			$("#post-gist").click(function() {
-				alert("test");
-			});
+			
 		});
 		
 	</script>
