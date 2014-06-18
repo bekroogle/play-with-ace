@@ -11,9 +11,13 @@
 				editor.setTheme("ace/theme/monokai");
 				editor.getSession().setMode("ace/mode/javascript");
 			});
-			$("#filename").attr("value", "ajax.txt");
+			
+		
+			$("#post-gist").click(function() {
+				alert("test");
+			});
 		});
-
+		
 	</script>
 <style>
 
@@ -30,7 +34,7 @@
 <body>
 <div id="editor">
 </div>
-<input type="file" id="openfile" />
+<button id="post-gist">Gist it!</button>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js" type="text/javascript" charset="utf-8"></script>
 <script>
