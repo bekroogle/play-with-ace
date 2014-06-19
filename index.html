@@ -10,24 +10,32 @@
 		var editor2;
 		
 		var global_gist_data;
+		var gistnum;
+		
+		
 		$(document).ready(function() {
+		getGist = function() {
+			gistnum = document.getElementById('gist-number').value;
+			console.log(gistnum);
+			ace.edit("editor").setValue("");
+			$.ajax({
+				url: 'https://api.github.com/gists/' + gistnum,
+				type: 'GET',
+				dataType: 'jsonp'
+			}).success( function(gistdata) {
+				for (file in gistdata.data.files) {
+					editor.setValue(editor.getValue() + "\n" + gistdata.data.files[file].content);
+				}
+				global_gist_data = gistdata;
+			});
+		}
+		
+			
 			$("#editor").load("ajax.src", function() {
 				editor = ace.edit("editor");
 				editor.setTheme("ace/theme/monokai");
 				editor.getSession().setMode("ace/mode/javascript");
 				
-				$("#post-gist").click(function() {
-					$.ajax({
-						url: 'https://api.github.com/gists/6942255',
-						type: 'GET',
-						dataType: 'jsonp'
-					}).success( function(gistdata) {
-						for (file in gistdata.data.files) {
-							editor.setValue(editor.getValue() + "\n" + gistdata.data.files[file].content);
-						}
-						global_gist_data = gistdata;
-					});
-				});
 			});
 			
 			$("#editor2").load("ajax.src", function() {
@@ -99,8 +107,10 @@
 <div id="editor"></div>
 <div id="editor2"></div>
 
-<button id="post-gist">Gist it!</button>
 
+<input id="gist-number" type="text" value="6942255" />
+<button id="load-gist-btn" onclick="getGist()">Get a gist!</button>
+</form>
 
 <script>
 
