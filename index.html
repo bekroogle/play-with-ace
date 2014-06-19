@@ -50,7 +50,18 @@
 */			
 			});
 			
-		
+			// Show the first editor, hide the second
+			$('#btn1').click( function() {
+				$('#editor').css('display', 'block');
+				$('#editor2').css('display', 'none');
+			});
+			
+			// Hide the first editor and show the second
+			$('#btn2').click( function() {
+				$('#editor').css('display', 'none');
+				$('#editor2').css('display', 'block');
+				
+			});
 			
 		});
 		
@@ -59,19 +70,22 @@
 
 #editor {
 	position: relative;
-	float: left;
+	
 	left: 0;
 	right: 0;
 	width: 500px;
 	height: 500px;
 }
 #editor2 {
+	display: none;
 	position: relative;
-	float: left;
-
+	left: 0;
 	right: 0;
 	width: 500px;
 	height: 500px;
+}
+#tabs {
+	clear: left;
 }
 </style>
 </head>
@@ -80,6 +94,10 @@
 <div id="editor">
 </div>
 <div id="editor2">
+</div>
+<div id="tabs">
+<button id="btn1">1</button>
+<button id="btn2">2</button>
 </div>
 <button id="post-gist">Gist it!</button>
 
